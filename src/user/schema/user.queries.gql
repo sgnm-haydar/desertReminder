@@ -1,0 +1,4 @@
+type Query {
+  getUser(email:String): User
+  getUsers:[User]
+}

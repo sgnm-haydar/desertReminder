@@ -1,0 +1,15 @@
+input CreateUserInput {
+  email: String
+  name: String
+}
+
+input PunishmentProcessorInput {
+  email:String!
+  proccesType:ProcessEnum!
+  count:Int!
+}
+
+enum ProcessEnum {
+  Add
+  Remove
+}

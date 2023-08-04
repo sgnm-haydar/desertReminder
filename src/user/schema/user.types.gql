@@ -1,0 +1,39 @@
+type UserProperties {
+  name: String
+  email: String
+  canDisplay: Boolean
+  isDeleted: Boolean
+  canDelete: Boolean
+  createdBy: String
+  updatedAt: String
+  createdAt: String
+}
+
+type User {
+  id: Int
+  labels: [String]
+  properties: UserProperties
+  punishment:Punishment
+}
+
+
+
+type Punishment {
+  id: Int
+  labels: [String]
+  properties: PunishmentProperties
+}
+
+
+type PunishmentProperties {
+  name: String
+  count: Int
+  emailSendCount: Int
+  canDisplay: Boolean
+  isDeleted: Boolean
+  canDelete: Boolean
+  createdBy: String
+  updatedAt: String
+  createdAt: String
+}
+
