@@ -5,12 +5,13 @@ import { UserService } from './services/user.service';
 import { RepositoryEnum } from 'src/common/const/repository.enum';
 
 @Module({
-  providers:
-    [UserResolver,
-      UserService,
-      { 
-        provide: RepositoryEnum.USER, 
-        useClass: UserRepository,
-      },]
+  providers: [
+    UserResolver,
+    UserService,
+    {
+      provide: RepositoryEnum.USER,
+      useClass: UserRepository,
+    },
+  ],
 })
-export class UserModule { }
+export class UserModule {}

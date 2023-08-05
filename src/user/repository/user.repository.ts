@@ -10,9 +10,68 @@ import { RelationNameEnum } from 'src/common/const/relation.name.enum';
 @Injectable()
 export class UserRepository implements UserInterface {
   /**
-   * Inject Neo4jService 
+   * Inject Neo4jService
    */
   constructor(private readonly neo4jService: Neo4jService) {}
+  async createUser(createUserDto: any) {
+    try {
+      const { name, email } = createUserDto;
+      let user = await this.neo4jService.findByLabelAndFilters(
+        [Neo4jLabelEnum.USER],
+        {
+          isDeleted: false,
+          email,
+        },
+      );
+      if (!user.length) {
+        const userEntity = new User();
+        const userFinalObject = assignDtoPropToEntity(
+          userEntity,
+          createUserDto,
+        );
+        let user = await this.neo4jService.createNode(userFinalObject, [
+          Neo4jLabelEnum.USER,
+        ]);
+        const punishmentDto = {
+          count: 0,
+          emailSendCount: 0,
+          name: name + Neo4jLabelEnum.PUNISHMENT,
+        };
+        const punishmentEntity = new User();
+        const punishmentFinalObject = assignDtoPropToEntity(
+          punishmentEntity,
+          punishmentDto,
+        );
+        let punishmentNode = await this.neo4jService.createNode(
+          punishmentFinalObject,
+          [Neo4jLabelEnum.PUNISHMENT],
+        );
+
+        await this.neo4jService.addRelationByIdWithRelationNameAndFilters(
+          user.identity.low,
+          user.labels,
+          { isDeleted: false },
+          punishmentNode.identity.low,
+          punishmentNode.labels,
+          { isDeleted: false },
+          RelationNameEnum.PARENT_OF,
+          { isDeleted: false },
+        );
+        const respone = {
+          id: user.identity.low,
+          labels: user.labels,
+          properties: user.properties,
+        };
+
+        return respone;
+      } else {
+        throw new HttpException('user already exist', 400);
+      }
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   async getUserPunishment(email: any) {
     let user = await this.neo4jService.findChildrensByLabelsAndFilters(
       [Neo4jLabelEnum.USER],
@@ -65,8 +124,7 @@ export class UserRepository implements UserInterface {
               { isDeleted: false },
               [],
               {
-               
-                emailSendCount:0,
+                emailSendCount: 0,
                 count:
                   punishmentNode[0].get('children').properties.count - count,
               },
@@ -80,11 +138,10 @@ export class UserRepository implements UserInterface {
               { isDeleted: false },
               [],
               {
-                lastPunishmentDate:lastPunishmentDate,
-                updatedAt:moment().format('YYYY-MM-DD HH:mm:ss'),
+                lastPunishmentDate: lastPunishmentDate,
+                updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
                 count:
                   punishmentNode[0].get('children').properties.count + count,
-            
               },
             );
         }
@@ -98,7 +155,7 @@ export class UserRepository implements UserInterface {
       };
       return response;
     } catch (error) {
-      throw new Error (error);
+      throw new Error(error);
     }
   }
   async getUser(email) {

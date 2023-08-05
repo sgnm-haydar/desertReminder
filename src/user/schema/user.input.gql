@@ -1,12 +1,13 @@
 input CreateUserInput {
   email: String
   name: String
+  surname: String
 }
 
 input PunishmentProcessorInput {
-  email:String!
-  proccesType:ProcessEnum!
-  count:Int!
+  email: String!
+  proccesType: ProcessEnum!
+  count: Int!
 }
 
 enum ProcessEnum {

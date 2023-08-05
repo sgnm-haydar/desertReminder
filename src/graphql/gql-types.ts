@@ -16,6 +16,7 @@ export enum ProcessEnum {
 export interface CreateUserInput {
     email?: Nullable<string>;
     name?: Nullable<string>;
+    surname?: Nullable<string>;
 }
 
 export interface PunishmentProcessorInput {

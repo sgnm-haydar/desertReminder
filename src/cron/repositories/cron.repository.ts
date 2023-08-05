@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-
 import { Neo4jService } from 'sgnm-neo4j/dist';
-
-
 import { MailerService } from '@nestjs-modules/mailer';
 import { CronRepoInterface } from '../interface/cron.interface';
+import { Neo4jLabelEnum } from 'src/common/const/neo4j.label.enum';
+import { RelationNameEnum } from 'src/common/const/relation.name.enum';
 
 const moment = require('moment');
 @Injectable()
@@ -19,9 +18,11 @@ export class CronRepository implements CronRepoInterface {
   async sendEmail() {
     try {
       let punishments = await this.neo4jService.findByLabelAndFilters(
-        ['Punishment'],
+        [Neo4jLabelEnum.PUNISHMENT],
         { isDeleted: false },
       );
+
+      const mailSender = await this.configService.get('MAILER_USER');
 
       for (let index = 0; index < punishments.length; index++) {
         if (punishments[index].get('n').properties.count > 0) {
@@ -29,9 +30,9 @@ export class CronRepository implements CronRepoInterface {
             punishments[index].get('n').identity.low,
             punishments[index].get('n').labels,
             { isDeleted: false },
-            ['User'],
+            [Neo4jLabelEnum.USER],
             { isDeleted: false },
-            'PARENT_OF',
+            RelationNameEnum.PARENT_OF,
             { isDeleted: false },
             1,
           );
@@ -43,7 +44,7 @@ export class CronRepository implements CronRepoInterface {
 
           await this.mailerService.sendMail({
             to: relatedUser.get('parent').properties.email,
-            from: 'haydar.urdogan@signumtte.com',
+            from: mailSender,
             subject: 'Tatlı Borcunuz',
             text,
           });

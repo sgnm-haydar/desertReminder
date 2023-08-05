@@ -1,15 +1,65 @@
 [
-   {"name":"Haydar ","surname":"Urdoğan","email":"haydar.urdogan@signumtte.com"},
-   {"name":"Hadi ","surname":"Alizadeh","email":"hadi.alizadeh@signumtte.com"},
-   {"name":"Mustafa ","surname":"Durmaz","email":"mustafa.durmaz@signumtte.com"},
-   {"name":"Merve ","surname":"Yazanel","email":"merve.yazanel@signumtte.com"},
-   {"name":"Bedirhan ","surname":"Ulucecen","email":"bedirhan.ulucecen@signumtte.com"},
-   {"name":"Barış ","surname":"Erol","email":"baris.erol@signumtte.com"},
-   {"name":"Nuh ","surname":"Yurduseven","email":"nuh.yurduseven@signumtte.com"},
-   {"name":"Ahmet Berkay ","surname":"Bozkurt","email":"ahmet.bozkurt@signumtte.com"},
-   {"name":"Atamer ","surname":"Atalay","email":"atamer.atalay@signumtte.com"},
-   {"name":"Yağmur ","surname":"Doğan","email":"yagmur.dogan@signumtte.com"},
-   {"name":"Muratcan ","surname":"Yusufoğlu","email":"muratcan.yusufoglu@signumtte.com"},
-   {"name":"Özkan ","surname":"Aydın","email":"ozkan.aydin@signumtte.com"}
-
+  {
+    "name": "Haydar ",
+    "surname": "Urdoğan",
+    "email": "haydar.urdogan@signumtte.com"
+  },
+  {
+    "name": "Hadi ",
+    "surname": "Alizadeh",
+    "email": "hadi.alizadeh@signumtte.com"
+  },
+  {
+    "name": "Mustafa ",
+    "surname": "Durmaz",
+    "email": "mustafa.durmaz@signumtte.com"
+  },
+  {
+    "name": "Merve ",
+    "surname": "Yazanel",
+    "email": "merve.yazanel@signumtte.com"
+  },
+  {
+    "name": "Bedirhan ",
+    "surname": "Ulucecen",
+    "email": "bedirhan.ulucecen@signumtte.com"
+  },
+  { "name": "Barış ", "surname": "Erol", "email": "baris.erol@signumtte.com" },
+  {
+    "name": "Nuh ",
+    "surname": "Yurduseven",
+    "email": "nuh.yurduseven@signumtte.com"
+  },
+  {
+    "name": "Ahmet Berkay ",
+    "surname": "Bozkurt",
+    "email": "ahmet.bozkurt@signumtte.com"
+  },
+  {
+    "name": "Atamer ",
+    "surname": "Atalay",
+    "email": "atamer.atalay@signumtte.com"
+  },
+  {
+    "name": "Yağmur ",
+    "surname": "Doğan",
+    "email": "yagmur.dogan@signumtte.com"
+  },
+  {
+    "name": "Muratcan ",
+    "surname": "Yusufoğlu",
+    "email": "muratcan.yusufoglu@signumtte.com"
+  },
+  {
+    "name": "Batuhan ",
+    "surname": "Serin",
+    "email": "batuhan.serin@signumtte.com"
+  },
+  {
+    "name": "Batuhan ",
+    "surname": "Atalay",
+    "email": "batuhan.atalay@signumtte.com"
+  },
+  { "name": "Can ", "surname": "Kaynar", "email": "can.kaynar@signumtte.com" },
+  { "name": "Oya ", "surname": "Kaynar", "email": "oya.kaynar@signumtte.com" }
 ]

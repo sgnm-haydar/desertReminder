@@ -13,17 +13,14 @@ type User {
   id: Int
   labels: [String]
   properties: UserProperties
-  punishment:Punishment
+  punishment: Punishment
 }
-
-
 
 type Punishment {
   id: Int
   labels: [String]
   properties: PunishmentProperties
 }
-
 
 type PunishmentProperties {
   name: String
@@ -37,4 +34,3 @@ type PunishmentProperties {
   createdAt: String
   lasPunishmentDate: String
 }
-

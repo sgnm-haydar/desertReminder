@@ -1,4 +1,4 @@
 type Query {
-  getUser(email:String): User
-  getUsers:[User]
+  getUser(email: String): User
+  getUsers: [User]
 }

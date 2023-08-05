@@ -30,4 +30,8 @@ export class UserService {
   async getUserPunishment(email) {
     return await this.userRepository.getUserPunishment(email);
   }
+
+  async createUser(createUserDto) {
+    return await this.userRepository.createUser(createUserDto);
+  }
 }

@@ -1,6 +1,5 @@
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   createUserFromJson: String
-  punishmentProcessor(punishmentProcessorInput:PunishmentProcessorInput): User
-
+  punishmentProcessor(punishmentProcessorInput: PunishmentProcessorInput): User
 }

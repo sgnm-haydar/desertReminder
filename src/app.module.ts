@@ -30,7 +30,7 @@ import { ScheduleModule } from '@nestjs/schedule';
       inject: [ConfigService],
       useFactory: async (config: ConfigService) => ({
         transport: {
-          host: 'smtp-mail.outlook.com',
+          host: config.get('MAILER_HOST'),
           secure: false,
           auth: {
             user: config.get('MAILER_USER'),
