@@ -65,6 +65,7 @@ export class UserRepository implements UserInterface {
               { isDeleted: false },
               [],
               {
+               
                 emailSendCount:0,
                 count:
                   punishmentNode[0].get('children').properties.count - count,
@@ -79,9 +80,11 @@ export class UserRepository implements UserInterface {
               { isDeleted: false },
               [],
               {
+                lastPunishmentDate:lastPunishmentDate,
+                updatedAt:moment().format('YYYY-MM-DD HH:mm:ss'),
                 count:
                   punishmentNode[0].get('children').properties.count + count,
-                lastPunishmentDate,
+            
               },
             );
         }

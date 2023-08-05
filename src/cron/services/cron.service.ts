@@ -13,8 +13,6 @@ export class CronService  {
 
   @Cron(CronExpression.EVERY_DAY_AT_10AM)
   async createUsers() {
-    console.log('ÇALIŞTI');
-    
     return await this.cronRepository.sendEmail();
   }
 }
