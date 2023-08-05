@@ -5,6 +5,8 @@ import { UserModule } from './user/user.module';
 import { GraphqlModule } from './graphql/graphql.module';
 import { Neo4jModule } from 'sgnm-neo4j/dist';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { CronModule } from './cron/cron.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -41,7 +43,9 @@ import { MailerModule } from '@nestjs-modules/mailer';
       }),
     }),
     GraphqlModule,
-    UserModule
+    UserModule,
+    CronModule,
+    ScheduleModule.forRoot()
   ],
   controllers: [],
   providers: [],

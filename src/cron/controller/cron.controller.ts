@@ -1,6 +1,6 @@
 import {  Controller, Get, } from '@nestjs/common';
 import {  ApiTags } from '@nestjs/swagger';
-import { CronService } from './cron.service';
+import { CronService } from '../services/cron.service';
 
 @ApiTags('Cron')
 @Controller('cron')

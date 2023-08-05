@@ -2,10 +2,11 @@
 import { Module } from '@nestjs/common';
 
 
-import { CronRepository } from './cron.repository';
+import { CronRepository } from './repositories/cron.repository';
 
-import { CronService } from './cron.service';
-import { CronController } from './cron.controller';
+import { CronService } from './services/cron.service';
+import { CronController } from './controller/cron.controller';
+import { RepositoryEnum } from 'src/common/const/repository.enum';
 
 @Module({
   imports: [],
@@ -14,7 +15,7 @@ import { CronController } from './cron.controller';
     CronService,
 
     {
-      provide: 'CRON',
+      provide: RepositoryEnum.CRON,
       useClass: CronRepository,
     },
   ],

@@ -4,8 +4,9 @@ import { ConfigService } from '@nestjs/config';
 
 import { Neo4jService } from 'sgnm-neo4j/dist';
 
-import { CronRepoInterface } from './cron.interface';
+
 import { MailerService } from '@nestjs-modules/mailer';
+import { CronRepoInterface } from '../interface/cron.interface';
 
 const moment = require('moment');
 @Injectable()

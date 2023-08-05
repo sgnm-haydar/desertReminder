@@ -63,6 +63,7 @@ export interface PunishmentProperties {
     createdBy?: Nullable<string>;
     updatedAt?: Nullable<string>;
     createdAt?: Nullable<string>;
+    lasPunishmentDate?: Nullable<string>;
 }
 
 export interface IMutation {

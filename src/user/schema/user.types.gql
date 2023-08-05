@@ -35,5 +35,6 @@ type PunishmentProperties {
   createdBy: String
   updatedAt: String
   createdAt: String
+  lasPunishmentDate: String
 }
 
