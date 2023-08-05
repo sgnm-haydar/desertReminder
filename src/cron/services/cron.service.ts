@@ -11,7 +11,7 @@ export class CronService  {
     private readonly cronRepository: CronRepoInterface,
   ) {}
 
-  @Cron(CronExpression.EVERY_DAY_AT_3PM)
+  @Cron(CronExpression.EVERY_DAY_AT_10AM)
   async createUsers() {
     console.log('ÇALIŞTI');
     
