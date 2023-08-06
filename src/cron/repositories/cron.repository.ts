@@ -26,6 +26,7 @@ export class CronRepository implements CronRepoInterface {
 
       for (let index = 0; index < punishments.length; index++) {
         if (punishments[index].get('n').properties.count > 0) {
+
           const relatedUser = await this.neo4jService.getParentByIdAndFilters(
             punishments[index].get('n').identity.low,
             punishments[index].get('n').labels,
@@ -36,6 +37,8 @@ export class CronRepository implements CronRepoInterface {
             { isDeleted: false },
             1,
           );
+          console.log(relatedUser.get('parent').properties.email);
+          
           let text = `Sayın ${relatedUser.get('parent').properties.name} ${
             relatedUser.get('parent').properties.surname
           }  ofisimize ${
