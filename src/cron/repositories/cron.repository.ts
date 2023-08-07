@@ -17,20 +17,22 @@ export class CronRepository implements CronRepoInterface {
   ) {}
   async sendEmail() {
     try {
+      const mailSender = await this.configService.get('MAILER_USER');
+      const general_mail = await this.configService.get('GENERAL_MAIL');
+      const maxEmailSentCount = await this.configService.get(
+        'MAX_EMAIL_SENT_COUNT',
+      );
       const punishments = await this.neo4jService.findByLabelAndFilters(
         [Neo4jLabelEnum.PUNISHMENT],
         { isDeleted: false },
       );
 
-      //when emailSendCount>30
+      //when emailSendCount>maxEmailSentCount
       const punishmentListForOffice = punishments.filter((punishment) => {
-        if (punishment.get('n').properties.emailSendCount > 30) {
+        if (punishment.get('n').properties.emailSendCount > maxEmailSentCount) {
           return punishment;
         }
       });
-
-      const mailSender = await this.configService.get('MAILER_USER');
-      const general_mail = await this.configService.get(' GENERAL_MAIL');
 
       for (let index = 0; index < punishments.length; index++) {
         if (punishments[index].get('n').properties.count > 0) {
@@ -50,7 +52,10 @@ export class CronRepository implements CronRepoInterface {
             relatedUser.get('parent').properties.surname
           }  ofisimize ${
             punishments[index].get('n').properties.count
-          }  kadar tatlı borcunuz bulunmaktadır.Saygılarımızla`;
+          }  kadar tatlı borcunuz bulunmaktadır.Ofise mail gönderilmesine kalan email sayısı ${
+            maxEmailSentCount -
+            punishments[index].get('n').properties.emailSendCount
+          }.Saygılarımızla`;
 
           await this.mailerService.sendMail({
             to: relatedUser.get('parent').properties.email,
@@ -73,7 +78,7 @@ export class CronRepository implements CronRepoInterface {
 
       let finalText = '';
 
-      //when email send count>30 send email to general mail
+      //when email send count>maxEmailSentCount send email to general mail
       for (let index = 0; index < punishmentListForOffice.length; index++) {
         const relatedUser = await this.neo4jService.getParentByIdAndFilters(
           punishments[index].get('n').identity.low,
@@ -92,6 +97,16 @@ export class CronRepository implements CronRepoInterface {
           punishments[index].get('n').properties.count
         }  kadar tatlı borcunuz bulunmaktadır.`;
         finalText = finalText + text + `\n`;
+
+        await this.neo4jService.updateByIdAndFilter(
+          punishments[index].get('n').identity.low,
+          punishments[index].get('n').labels,
+          { isDeleted: false },
+          [],
+          {
+            emailSendCount: 0,
+          },
+        );
       }
 
       await this.mailerService.sendMail({
