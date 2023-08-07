@@ -4,9 +4,10 @@ import { UserInterface } from '../interface/user.interface';
 import moment = require('moment');
 import users from '../users.json';
 import { User } from '../enities/user.entity';
-import { ProcessEnum, PunishmentProcessorInput } from 'src/graphql/gql-types';
+
 import { Neo4jLabelEnum } from 'src/common/const/neo4j.label.enum';
 import { RelationNameEnum } from 'src/common/const/relation.name.enum';
+import { PunishmentProcessorInput, ProcessEnum } from 'src/graphql/gql-types';
 @Injectable()
 export class UserRepository implements UserInterface {
   /**

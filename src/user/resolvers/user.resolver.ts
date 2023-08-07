@@ -13,7 +13,6 @@ import {
   PunishmentProcessorInput,
   User,
 } from 'src/graphql/gql-types';
-import { Punishment } from '../enities/punishment.entity';
 
 @Resolver('User')
 export class UserResolver {
@@ -51,7 +50,7 @@ export class UserResolver {
     punishmentProcessorInput: PunishmentProcessorInput,
     @Context() context,
   ) {
-    const headers = context.req.headers;
+
     return await this.userService.punishmentProcessor(punishmentProcessorInput);
   }
 

@@ -20,5 +20,9 @@
     "noFallthroughCasesInSwitch": false,
     "esModuleInterop" :true,
     "moduleResolution": "node",
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

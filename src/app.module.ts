@@ -45,7 +45,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     GraphqlModule,
     UserModule,
     CronModule,
-    ScheduleModule.forRoot()
+    ScheduleModule.forRoot(),
   ],
   controllers: [],
   providers: [],
