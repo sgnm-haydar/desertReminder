@@ -10,7 +10,7 @@ export class CronService {
     @Inject(RepositoryEnum.CRON)
     private readonly cronRepository: CronRepoInterface,
   ) {}
-  @Cron(' 0 10 * * 1-5')
+  @Cron('0 0 10 * * 1-5')
   async createUsers() {
     return await this.cronRepository.sendEmail();
   }
