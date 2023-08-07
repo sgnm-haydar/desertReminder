@@ -109,12 +109,14 @@ export class CronRepository implements CronRepoInterface {
         );
       }
 
-      await this.mailerService.sendMail({
-        to: general_mail,
-        from: mailSender,
-        subject: 'Tatlı Borcunuz',
-        text: finalText,
-      });
+      if (punishmentListForOffice.length > 0) {
+        await this.mailerService.sendMail({
+          to: general_mail,
+          from: mailSender,
+          subject: 'Tatlı Borcunuz',
+          text: finalText,
+        });
+      }
 
       return 'success';
     } catch (error) {
