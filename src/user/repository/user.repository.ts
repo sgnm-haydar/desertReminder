@@ -17,7 +17,7 @@ export class UserRepository implements UserInterface {
   async createUser(createUserDto: any) {
     try {
       const { name, email } = createUserDto;
-      let user = await this.neo4jService.findByLabelAndFilters(
+      const user = await this.neo4jService.findByLabelAndFilters(
         [Neo4jLabelEnum.USER],
         {
           isDeleted: false,
@@ -30,7 +30,7 @@ export class UserRepository implements UserInterface {
           userEntity,
           createUserDto,
         );
-        let user = await this.neo4jService.createNode(userFinalObject, [
+        const user = await this.neo4jService.createNode(userFinalObject, [
           Neo4jLabelEnum.USER,
         ]);
         const punishmentDto = {
@@ -43,7 +43,7 @@ export class UserRepository implements UserInterface {
           punishmentEntity,
           punishmentDto,
         );
-        let punishmentNode = await this.neo4jService.createNode(
+        const punishmentNode = await this.neo4jService.createNode(
           punishmentFinalObject,
           [Neo4jLabelEnum.PUNISHMENT],
         );
@@ -74,7 +74,7 @@ export class UserRepository implements UserInterface {
   }
 
   async getUserPunishment(email: any) {
-    let user = await this.neo4jService.findChildrensByLabelsAndFilters(
+    const user = await this.neo4jService.findChildrensByLabelsAndFilters(
       [Neo4jLabelEnum.USER],
       { isDeleted: false, email },
       [Neo4jLabelEnum.PUNISHMENT],
@@ -84,7 +84,7 @@ export class UserRepository implements UserInterface {
       1,
     );
 
-    let respone = {
+    const respone = {
       id: user[0].get('children').identity.low,
       labels: user[0].get('children').labels,
       properties: user[0].get('children').properties,
@@ -97,7 +97,7 @@ export class UserRepository implements UserInterface {
   ) {
     try {
       const { email, count, proccesType } = punishmentProcessorInput;
-      let user = await this.neo4jService.findByLabelAndFilters(
+      const user = await this.neo4jService.findByLabelAndFilters(
         [Neo4jLabelEnum.USER],
         {
           isDeleted: false,
@@ -161,7 +161,7 @@ export class UserRepository implements UserInterface {
   }
   async getUser(email) {
     try {
-      let user = await this.neo4jService.findByLabelAndFilters(
+      const user = await this.neo4jService.findByLabelAndFilters(
         [Neo4jLabelEnum.USER],
         {
           isDeleted: false,
@@ -204,7 +204,7 @@ export class UserRepository implements UserInterface {
   async createUserFromJsonFile() {
     try {
       for (let index = 0; index < users.length; index++) {
-        let user = await this.neo4jService.findByLabelAndFilters(
+        const user = await this.neo4jService.findByLabelAndFilters(
           [Neo4jLabelEnum.USER],
           {
             isDeleted: false,
@@ -219,7 +219,7 @@ export class UserRepository implements UserInterface {
           };
           const userEntity = new User();
           const userFinalObject = assignDtoPropToEntity(userEntity, userDto);
-          let user = await this.neo4jService.createNode(userFinalObject, [
+          const user = await this.neo4jService.createNode(userFinalObject, [
             Neo4jLabelEnum.USER,
           ]);
           const punishmentDto = {
@@ -232,7 +232,7 @@ export class UserRepository implements UserInterface {
             punishmentEntity,
             punishmentDto,
           );
-          let punishmentNode = await this.neo4jService.createNode(
+          const punishmentNode = await this.neo4jService.createNode(
             punishmentFinalObject,
             [Neo4jLabelEnum.PUNISHMENT],
           );
